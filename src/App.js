@@ -30,7 +30,7 @@ function App() {
       console.log(error);
     })
     console.log(startDateState.getFullYear());
-  },[])
+  },[]);
 
   const addEvent=()=>{
 
@@ -44,7 +44,7 @@ function App() {
     const eday   = endDate.getDate().toString().padStart(2, "0");
     const ehours= endDate.getHours().toString().padStart(2,"0");
     const eminutes= endDate.getMinutes().toString().padStart(2,"0")
-    alert(`${startDateState.getFullYear()}-${startDateState.getMonth()}-${startDateState.getDate()}T${startDateState.getHours()}:${startDateState.getMinutes()}:00${endDate.getFullYear()}-${endDate.getMonth()}-${endDate.getDate()}T${endDate.getHours()}:${endDate.getMinutes()}:00`)
+    //alert(`${startDateState.getFullYear()}-${startDateState.getMonth()}-${startDateState.getDate()}T${startDateState.getHours()}:${startDateState.getMinutes()}:00${endDate.getFullYear()}-${endDate.getMonth()}-${endDate.getDate()}T${endDate.getHours()}:${endDate.getMinutes()}:00`)
     Axios.post('https://graph.microsoft.com/v1.0/me/calendars/AAMkAGUxYzhmYWViLTk3Y2MtNGNlOC04OTYyLWEzMDk2ODg5M2M1NgBGAAAAAAD9QiWpkpRiTLHApXmB7B8lBwC2pBhdGQNITo-78bb6qcJDAAAAAAEGAAC2pBhdGQNITo-78bb6qcJDAAAeos5PAAA=/events'
             ,
             {
@@ -81,7 +81,7 @@ function App() {
           },(error)=>{
             console.log(error);
           })
-          alert(`${startDateState.getFullYear()}-${startDateState.getMonth()}-${startDateState.getDate()}T${startDateState.getHours()}:${startDateState.getMinutes()}:00${endDate.getFullYear()}-${endDate.getMonth()}-${endDate.getDate()}T${endDate.getHours()}:${endDate.getMinutes()}:00`)
+          //alert(`${startDateState.getFullYear()}-${startDateState.getMonth()}-${startDateState.getDate()}T${startDateState.getHours()}:${startDateState.getMinutes()}:00${endDate.getFullYear()}-${endDate.getMonth()}-${endDate.getDate()}T${endDate.getHours()}:${endDate.getMinutes()}:00`)
 
   }
   
