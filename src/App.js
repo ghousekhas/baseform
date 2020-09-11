@@ -11,6 +11,7 @@ import { TextField,Button,CardHeader } from '@material-ui/core';
 function App() {
   const [date,setDate]=useState(1);
   const [course,setCourse]=useState('');
+  const [dourse,setDourse]=useState('');
   const [units,setUnits]=useState('');
   const [title,setTitle]=useState('');
   const [startDateState,setStartDate]=useState(moment().toDate());
@@ -51,7 +52,7 @@ function App() {
               subject: title,
               body: {
                 contentType: "HTML",
-                content: c+d
+                content: course+dourse
               },
               start: {
                   dateTime: `${syear}-${smonth}-${sday}T${shours}:${sminutes}:00`,
@@ -142,8 +143,8 @@ function App() {
         <Autocomplete options={courses}
             getOptionLabel={(option) => option.name}
             style={{width: '100%', margin: 0,alignSelf: 'center' }}
-            onInputChange={(event,newValue)=>{c=newValue
-            console.log(c)}}
+            onInputChange={(event,newValue)=>{setCourse(newValue)
+            }}
             renderInput={(params) => <TextField {...params} label="Select the course" variant="outlined"   />}/>
       </div>
       <div className='Division'>
@@ -151,7 +152,7 @@ function App() {
         <Autocomplete options={top100Films}
             getOptionLabel={(option) => option.title}
             style={{width: '100%', margin: 0,alignSelf: 'center' }}
-            onInputChange={(event,newValue)=>d=newValue}
+            onInputChange={(event,newValue)=>setDourse(newValue)}
             renderInput={(params) => <TextField {...params} label="Select course unit" variant="outlined" />}/>
       </div>
       <div className='Division'>
