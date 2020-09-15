@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c19d4dbb0e1a842d7f6d1de584636a16",
+    "revision": "00fbd23c373dda724fc08d242330dffb",
     "url": "/baseform/index.html"
   },
   {
-    "revision": "7e56bfc97e44130686c3",
+    "revision": "9c0750f3f61ddd7977b8",
     "url": "/baseform/static/css/main.d34ba0c4.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/baseform/static/js/2.73828592.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "7e56bfc97e44130686c3",
-    "url": "/baseform/static/js/main.63d4c91f.chunk.js"
+    "revision": "9c0750f3f61ddd7977b8",
+    "url": "/baseform/static/js/main.85690117.chunk.js"
   },
   {
     "revision": "a9892dc85dfa8c6cbd6f",
