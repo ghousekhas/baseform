@@ -21,10 +21,11 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: black;
+  color: rgb(0, 0, 0);
   font-size: xx-large;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: bold;
+  font-family: 'Segoe UI';
+  font-weight:'SemiBold';
+  background-color: #6264A7;
   
 }
 
@@ -37,6 +38,15 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  width: 60vw;
+  margin-left: 15vw;
+  margin-right: 15vw;
+}
+
+.Background {
+  background-color: #ffffff;
+  width: 100vm;
+  height: 100vh;
 }
 
 
@@ -61,6 +71,7 @@
   align-content: center;
   display: flex;
   flex-direction: column;
+  width: '100%';
 }
 
 .Division {
@@ -74,15 +85,31 @@
   
 }
 
+.AnotherDivision {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 
 .TextTitle {
-  color: #000000;
-  font-weight: bold;
-  font-size: 25px;
+  color: #737373;
+  font-weight: '500';
+  font-size: 4vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-align: start;
   width: '5%';
+  padding-right: 1vw;
+  padding-left: 1vw;
 
 
+}
+.abc {
+  text-align: center;
+}
+
+.def{
+  font-size: 2vh;
 }
 
 .BorderIsBorder {
@@ -92,8 +119,17 @@
 .HorizontalDivision {
   display: flex;
   flex-direction: row;
-  align-self: center;
-  justify-self: center;
-  width: fit-content;
+  justify-content: center;
+  width: 60vw;
+  
+}
 
+.ScrollDivision{
+  overflow-y: scroll;
+  height: 40vh;
+  width: 60vw;
+}
+
+.App::-webkit-scrollbar {
+  width: 25px;
 }
