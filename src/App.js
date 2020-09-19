@@ -66,7 +66,7 @@ function App() {
               
               setEdxToken(response.data.access_token);
             },(error)=>{
-              setLogin(69);
+              setLogin(6);
               
             })
     }
@@ -135,7 +135,7 @@ function App() {
             
           },(error)=>{
             console.log(error);
-            setLogin(69);
+            setLogin(6);
             
           })
           //alert(`${startDateState.getFullYear()}-${startDateState.getMonth()}-${startDateState.getDate()}T${startDateState.getHours()}:${startDateState.getMinutes()}:00${endDate.getFullYear()}-${endDate.getMonth()}-${endDate.getDate()}T${endDate.getHours()}:${endDate.getMinutes()}:00`)
@@ -219,7 +219,7 @@ function App() {
           });
           setUserEmails(tempArr);
         },(error)=>{
-          setLogin(69);
+          setLogin(6);
           
         })
 
@@ -253,7 +253,7 @@ function App() {
 
       }
     },(error)=>{
-      setLogin(69);
+      setLogin(6);
       
     });
     usernames.forEach((item,index,arr)=>{
@@ -294,7 +294,7 @@ function App() {
     window.location.reload();
   }
 
-  if(login==69)
+  if(login==6)
   return( <div className="App">
       <header className="App-header">
         <p>500 internal error</p>
@@ -361,7 +361,7 @@ function App() {
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle id="alert-dialog-slide-title">{"Use Google's location service?"}</DialogTitle>
+        <DialogTitle id="alert-dialog-slide-title">{"Link Copied!"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
             The link has been copied to your clipboard
