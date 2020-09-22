@@ -178,7 +178,8 @@ function App() {
 
   const dourseChanged=(event,newValue)=>{
     console.log(event,newValue);
-    setDourse(newValue.name);
+    setDourse(newValue.display_name);
+    console.log(newValue.name);
     units.forEach((item,index,units)=>{
       if(newValue.block_id==item.block_id){
         setUnitIndex(index);
