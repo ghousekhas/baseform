@@ -350,7 +350,7 @@ function App() {
 
 
   if(login===0)
-    return (<MicrosoftLogin ref={(ref)=>loginRef=ref} clientId={'c4e63d26-dcf1-4d0a-bac1-ae0bc5afca83'} authCallback={authHandler} redirectUri={'http://localhost:3000/baseform'} graphScopes={['Calendars.ReadWrite','Group.ReadWrite.All']} />)
+    return (<MicrosoftLogin ref={(ref)=>loginRef=ref} clientId={'c4e63d26-dcf1-4d0a-bac1-ae0bc5afca83'} authCallback={authHandler} redirectUri={'https://ghousekhas.github.io/baseform/'} graphScopes={['Calendars.ReadWrite','Group.ReadWrite.All']} />)
 
   if(login==3)
     return( <div className="App">
