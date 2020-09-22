@@ -43,7 +43,7 @@ function App() {
   const [course_id,setCourseId]=useState('');
   const [unitIndex,setUnitIndex]=useState('');
   var linkRef= React.createRef();
-  var a;
+  var a,b,c,d;
   var loginRef=React.createRef();
   const [courses,setCourses]=useState(['']);
   //var token='eyJ0eXAiOiJKV1QiLCJub25jZSI6Ii1lenZEMVcteW9OT1JlOEhiT2VnaVNtM0JFWk52RVN4UkxPXzQ2MlFmOUkiLCJhbGciOiJSUzI1NiIsIng1dCI6ImppYk5ia0ZTU2JteFBZck45Q0ZxUms0SzRndyIsImtpZCI6ImppYk5ia0ZTU2JteFBZck45Q0ZxUms0SzRndyJ9.eyJhdWQiOiIwMDAwMDAwMy0wMDAwLTAwMDAtYzAwMC0wMDAwMDAwMDAwMDAiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC82ZjM2NDRlOC03YjcxLTQ3OTgtODA5MS00MGZhOWU4MDQ4ZDYvIiwiaWF0IjoxNTk5NzQ2NTA2LCJuYmYiOjE1OTk3NDY1MDYsImV4cCI6MTU5OTc1MDQwNiwiYWNjdCI6MCwiYWNyIjoiMSIsImFpbyI6IkFTUUEyLzhRQUFBQS81T2hDcnErUS9EeXF5d2I0YzJ5VWRpU2FEbWt6TWFyL1RjNGVhSk00UHc9IiwiYW1yIjpbInB3ZCJdLCJhcHBfZGlzcGxheW5hbWUiOiJHcmFwaCBleHBsb3JlciAob2ZmaWNpYWwgc2l0ZSkiLCJhcHBpZCI6ImRlOGJjOGI1LWQ5ZjktNDhiMS1hOGFkLWI3NDhkYTcyNTA2NCIsImFwcGlkYWNyIjoiMCIsImdpdmVuX25hbWUiOiJMYXhtaSIsImlkdHlwIjoidXNlciIsImlwYWRkciI6IjEwNi41MS4yNDMuMzYiLCJuYW1lIjoiTGF4bWkiLCJvaWQiOiIyYWIwODNiMi0zYzNkLTQ0NWEtOTcwNC04MzY2NmRmYzg2MTYiLCJwbGF0ZiI6IjE0IiwicHVpZCI6IjEwMDMyMDAwRDI3RjREOEIiLCJyaCI6IjAuQUFBQTZFUTJiM0Y3bUVlQWtVRDZub0JJMXJYSWk5NzUyYkZJcUsyM1NOcHlVR1FZQUlFLiIsInNjcCI6IkNhbGVuZGFycy5SZWFkV3JpdGUgb3BlbmlkIHByb2ZpbGUgVXNlci5SZWFkIGVtYWlsIiwic2lnbmluX3N0YXRlIjpbImttc2kiXSwic3ViIjoiYmN4aTVzZ1VZUFJvai1zdmFTcWtLMWg4MndVX0drSDBjcWxtLWM5Q1ZpSSIsInRlbmFudF9yZWdpb25fc2NvcGUiOiJOQSIsInRpZCI6IjZmMzY0NGU4LTdiNzEtNDc5OC04MDkxLTQwZmE5ZTgwNDhkNiIsInVuaXF1ZV9uYW1lIjoiTGF4bWlAdnRlYW1sYWJzLmNvbSIsInVwbiI6IkxheG1pQHZ0ZWFtbGFicy5jb20iLCJ1dGkiOiJIc2xLbDlJVVAweWIyeXh5aVFFYkFBIiwidmVyIjoiMS4wIiwid2lkcyI6WyJiNzlmYmY0ZC0zZWY5LTQ2ODktODE0My03NmIxOTRlODU1MDkiXSwieG1zX3N0Ijp7InN1YiI6IlVvSkFuQjFIa2EwWFZYT1pZM3pzTmxsZXpzNzJCTUYxancyTzVtMzUwcW8ifSwieG1zX3RjZHQiOjE0NDM0MjA2MDR9.wTRSUxLd6bRGzMt6qrk8MxLxEKwU9GxRa_Hcveqh_2_1XLCzyPRh3uhUP_3JIE6yj5uKCrIXDBmLmwrs5ein7mMFEW7oGLG9HmQ9DPxVW_urq2npfopL9w8mqDOMMOLE5UbjeAI45AWliKpVQ6DO8GmcN-uVY3hsiRfo4c96AV6eYuYefj9M4mbIDXJDVY2K9kG9tWcBlqp_qjli5AUIDjWLI2uRWqDM9fGv1f8F0HWpFDLaSI2_S8KPP3kRQLzxZYJXtkTzs3TBqM4jrL70llj88pcBu4PtbbGzTHY0jdpaV9c_cSJ-3IEzBvOlfrAM2mBPY6pa5AH1Q3tb5Y5BHA';
@@ -136,10 +136,9 @@ function App() {
             var tempUrl=response.data.onlineMeeting.joinUrl;
             setLogin(3);
 
-              console.log(myDiscussionId);
                 Axios.post('https://edxvteam.com/api/discussion/v1/threads/',{
                     course_id: course_id,
-                    raw_body: `The class for ${course} titled ${title} for ${dourse} was successfully scheduled from ${startDateState.toString()} to ${endDate.toString()} at ${tempUrl}`,
+                    raw_body: `The class for ${course} titled ${title} for ${dourse} was successfully scheduled from ${startDateState.toString()} to ${endDate.toString()} at \n ${tempUrl} \n Additional Description: ${description}`,
                     type: "discussion",
                     title: title,
                     topic_id: "course"
