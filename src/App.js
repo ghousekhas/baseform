@@ -40,6 +40,8 @@ function App() {
   const [joinUrl,setJoinUrl]=useState('');
   const [description,setDescription]=useState('');
   const [open,setOpen]=useState(false);
+  const [course_id,setCourseId]=useState('');
+  const [unitIndex,setUnitIndex]=useState('');
   var linkRef= React.createRef();
   var a,b,c,d;
   var loginRef=React.createRef();
@@ -132,10 +134,38 @@ function App() {
             console.log(response);
             setJoinUrl(response.data.onlineMeeting.joinUrl);
             setLogin(3);
+
+            Axios.get('https://edxvteam.com/api/discussion/v1/course_topics/'+course_id,{
+              headers:{
+                Authorization: `Bearer ${edxToken}`
+              }
+            }).then((response)=>{
+              console.log(response.data);
+              var myData= response.data.courseware_topics;
+              var myDiscussionId=myData[0].children[unitIndex].id;
+              console.log(myDiscussionId);
+                Axios.post('https://edxvteam.com/api/discussion/v1/threads/',{
+                    course_id: course_id,
+                    raw_body: `The class for ${course} was successfully scheduled from ${startDateState.toString()} to ${endDate.toString()} at \n ${joinUrl}`,
+                    type: "discussion",
+                    title: title,
+                    topic_id: myDiscussionId
+                  },
+                  {
+                    headers:{
+                      Authorization: `Bearer ${edxToken}`
+                    }
+                  }).then((response)=>{
+                    console.log(response);
+                  },(error)=>{console.log(error)})
+              
+              
+            },(error)=>{console.log(error)})
             
           },(error)=>{
             console.log(error);
             setLogin(6);
+            
             
           })
           //alert(`${startDateState.getFullYear()}-${startDateState.getMonth()}-${startDateState.getDate()}T${startDateState.getHours()}:${startDateState.getMinutes()}:00${endDate.getFullYear()}-${endDate.getMonth()}-${endDate.getDate()}T${endDate.getHours()}:${endDate.getMinutes()}:00`)
@@ -161,11 +191,23 @@ function App() {
     }
   }
 
+  const dourseChanged=(event,newValue)=>{
+    console.log(event,newValue);
+    setDourse(newValue.name);
+    units.forEach((item,index,units)=>{
+      if(newValue.block_id==item.block_id){
+        setUnitIndex(index);
+      }
+    });
+
+  }
+
   const courseChanged=(event,newValue)=>{
     var unitBlocks={};
    // 
     
     setCourse(newValue.name);
+    setCourseId(newValue.course_id);
     
     var usernameslist='';
     var usernames=['satishag','satishag87'];
@@ -237,6 +279,7 @@ function App() {
         Authorization: `Bearer ${edxToken}`
       }
     }).then((response)=>{
+      console.log(response.data);
       
       if(response.data.blocks != undefined){
         var unis=[];
@@ -262,7 +305,6 @@ function App() {
       else
         usernameslist=usernameslist+item;
     });
-    var course_id=newValue.course_id;
     
     /*Axios.get('https://edxvteam.com/api/user/v1/accounts/',
     qs.stringify({
@@ -323,7 +365,7 @@ function App() {
 
 
   if(login===0)
-    return (<MicrosoftLogin ref={(ref)=>loginRef=ref} clientId={'c4e63d26-dcf1-4d0a-bac1-ae0bc5afca83'} authCallback={authHandler} redirectUri={'https://ghousekhas.github.io/baseform/'} graphScopes={['Calendars.ReadWrite','Group.ReadWrite.All']} />)
+    return (<MicrosoftLogin ref={(ref)=>loginRef=ref} clientId={'c4e63d26-dcf1-4d0a-bac1-ae0bc5afca83'} authCallback={authHandler} redirectUri={'http://localhost:3000/baseform'} graphScopes={['Calendars.ReadWrite','Group.ReadWrite.All']} />)
 
   if(login==3)
     return( <div className="App">
@@ -442,7 +484,8 @@ function App() {
         <Autocomplete options={units}
             getOptionLabel={(option) => option.display_name}
             style={{width: '100%', margin: 0,alignSelf: 'center' }}
-            onInputChange={(event,newValue)=>setDourse(newValue)}
+            //onInputChange={(event,newValue)=>setDourse(newValue)}
+            onChange={dourseChanged}
             renderInput={(params) => <TextField {...params} label="Select course unit" variant="outlined" />}/>
       </div>
       <div className="Division">
