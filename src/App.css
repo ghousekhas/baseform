@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  background-color: #ffffff;
+  height: fit-content;
 }
 
 .App-logo {
@@ -46,7 +48,7 @@
 .Background {
   background-color: #ffffff;
   width: 100vm;
-  height: 100vh;
+  height: '100%';
 }
 
 

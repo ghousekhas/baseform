@@ -40,6 +40,8 @@ function App() {
   const [joinUrl,setJoinUrl]=useState('');
   const [description,setDescription]=useState('');
   const [open,setOpen]=useState(false);
+  const [course_id,setCourseId]=useState('');
+  const [unitIndex,setUnitIndex]=useState('');
   var linkRef= React.createRef();
   var a,b,c,d;
   var loginRef=React.createRef();
@@ -66,7 +68,7 @@ function App() {
               
               setEdxToken(response.data.access_token);
             },(error)=>{
-              setLogin(69);
+              setLogin(6);
               
             })
     }
@@ -131,14 +133,27 @@ function App() {
           }).then((response)=>{
             console.log(response);
             setJoinUrl(response.data.onlineMeeting.joinUrl);
+            var tempUrl=response.data.onlineMeeting.joinUrl;
             setLogin(3);
-            
-          },(error)=>{
-            console.log(error);
-            setLogin(69);
-            
-          })
-          //alert(`${startDateState.getFullYear()}-${startDateState.getMonth()}-${startDateState.getDate()}T${startDateState.getHours()}:${startDateState.getMinutes()}:00${endDate.getFullYear()}-${endDate.getMonth()}-${endDate.getDate()}T${endDate.getHours()}:${endDate.getMinutes()}:00`)
+
+                Axios.post('https://edxvteam.com/api/discussion/v1/threads/',{
+                    course_id: course_id,
+                    raw_body: `The class for ${course} titled ${title} for ${dourse} was successfully scheduled from ${startDateState.toString()} to ${endDate.toString()} at \n ${tempUrl} \n Additional Description: ${description}`,
+                    type: "discussion",
+                    title: title,
+                    topic_id: "course"
+                  },
+                  {
+                    headers:{
+                      Authorization: `Bearer ${edxToken}`
+                    }
+                  }).then((response)=>{
+                    console.log(response);
+                  },(error)=>{console.log(error)})
+              
+              
+            },(error)=>{console.log(error)})
+        
 
   }
   
@@ -161,11 +176,23 @@ function App() {
     }
   }
 
+  const dourseChanged=(event,newValue)=>{
+    console.log(event,newValue);
+    setDourse(newValue.name);
+    units.forEach((item,index,units)=>{
+      if(newValue.block_id==item.block_id){
+        setUnitIndex(index);
+      }
+    });
+
+  }
+
   const courseChanged=(event,newValue)=>{
     var unitBlocks={};
    // 
     
     setCourse(newValue.name);
+    setCourseId(newValue.course_id);
     
     var usernameslist='';
     var usernames=['satishag','satishag87'];
@@ -219,7 +246,7 @@ function App() {
           });
           setUserEmails(tempArr);
         },(error)=>{
-          setLogin(69);
+          setLogin(6);
           
         })
 
@@ -237,6 +264,7 @@ function App() {
         Authorization: `Bearer ${edxToken}`
       }
     }).then((response)=>{
+      console.log(response.data);
       
       if(response.data.blocks != undefined){
         var unis=[];
@@ -253,7 +281,7 @@ function App() {
 
       }
     },(error)=>{
-      setLogin(69);
+      setLogin(6);
       
     });
     usernames.forEach((item,index,arr)=>{
@@ -262,7 +290,6 @@ function App() {
       else
         usernameslist=usernameslist+item;
     });
-    var course_id=newValue.course_id;
     
     /*Axios.get('https://edxvteam.com/api/user/v1/accounts/',
     qs.stringify({
@@ -294,7 +321,7 @@ function App() {
     window.location.reload();
   }
 
-  if(login==69)
+  if(login==6)
   return( <div className="App">
       <header className="App-header">
         <p>500 internal error</p>
@@ -323,7 +350,7 @@ function App() {
 
 
   if(login===0)
-    return (<MicrosoftLogin ref={(ref)=>loginRef=ref} clientId={'c4e63d26-dcf1-4d0a-bac1-ae0bc5afca83'} authCallback={authHandler} redirectUri={'https://ghousekhas.github.io/baseform/'} graphScopes={['Calendars.ReadWrite','Group.ReadWrite.All']} />)
+    return (<MicrosoftLogin ref={(ref)=>loginRef=ref} clientId={'c4e63d26-dcf1-4d0a-bac1-ae0bc5afca83'} authCallback={authHandler} redirectUri={'http://localhost:3000/baseform'} graphScopes={['Calendars.ReadWrite','Group.ReadWrite.All']} />)
 
   if(login==3)
     return( <div className="App">
@@ -361,7 +388,7 @@ function App() {
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle id="alert-dialog-slide-title">{"Use Google's location service?"}</DialogTitle>
+        <DialogTitle id="alert-dialog-slide-title">{"Link Copied!"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
             The link has been copied to your clipboard
@@ -442,7 +469,8 @@ function App() {
         <Autocomplete options={units}
             getOptionLabel={(option) => option.display_name}
             style={{width: '100%', margin: 0,alignSelf: 'center' }}
-            onInputChange={(event,newValue)=>setDourse(newValue)}
+            //onInputChange={(event,newValue)=>setDourse(newValue)}
+            onChange={dourseChanged}
             renderInput={(params) => <TextField {...params} label="Select course unit" variant="outlined" />}/>
       </div>
       <div className="Division">
